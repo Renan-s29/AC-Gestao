@@ -13,10 +13,17 @@
 
   <section class="work-area">
     <header class="wire-topbar">
-      <button class="hamb" type="button" aria-label="menu"><mat-icon>menu</mat-icon></button>
+      <button class="hamb" type="button" aria-label="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
       <div class="global-search">
         <mat-icon>search</mat-icon>
-        <input #busca type="text" placeholder="Buscar associado (nome, CNPJ ou CPF)" (keyup.enter)="buscarAssociado(busca.value)" />
+        <input
+          #busca
+          type="text"
+          placeholder="Buscar Associado"
+          (keyup.enter)="buscarAssociado(busca.value)"
+        />
       </div>
       <div class="user-area">
         <mat-icon>person</mat-icon>
