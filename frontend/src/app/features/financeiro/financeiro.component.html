@@ -1,0 +1,64 @@
+<div class="ac-page">
+  <h2>Financeiro</h2>
+  <p class="ac-muted">Faturamento mensal, juros/multa e baixa de pagamentos — operações sujeitas a segregação de funções.</p>
+
+  <mat-card class="acoes">
+    <mat-card-title>Gerar faturamento mensal</mat-card-title>
+    <div class="row" [formGroup]="formMes">
+      <mat-form-field appearance="outline">
+        <mat-label>Referência (YYYY-MM)</mat-label>
+        <input matInput formControlName="referencia_mes" />
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="button" (click)="gerarMensal()">
+        <mat-icon>add_task</mat-icon>
+        Gerar
+      </button>
+    </div>
+  </mat-card>
+
+  <mat-card class="mt">
+    @if (carregando()) {
+      <div class="loading">
+        <mat-spinner diameter="36"></mat-spinner>
+      </div>
+    } @else {
+      <table mat-table [dataSource]="linhas()" class="mat-elevation-z0">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="associado_id">
+          <th mat-header-cell *matHeaderCellDef>Assoc.</th>
+          <td mat-cell *matCellDef="let row">{{ row.associado_id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="razao_social">
+          <th mat-header-cell *matHeaderCellDef>Associado</th>
+          <td mat-cell *matCellDef="let row">{{ row.razao_social }}</td>
+        </ng-container>
+        <ng-container matColumnDef="valor_total">
+          <th mat-header-cell *matHeaderCellDef>Valor</th>
+          <td mat-cell *matCellDef="let row">{{ row.valor_total | number : '1.2-2' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="data_vencimento">
+          <th mat-header-cell *matHeaderCellDef>Vencimento</th>
+          <td mat-cell *matCellDef="let row">{{ row.data_vencimento }}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+        </ng-container>
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            @if (row.status === 'pendente') {
+              <button mat-button type="button" (click)="calcular(row.id)">Calcular juros/multa</button>
+              <button mat-button color="primary" type="button" (click)="marcarPago(row.id)">Marcar pago</button>
+            }
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="cols"></tr>
+        <tr mat-row *matRowDef="let row; columns: cols"></tr>
+      </table>
+    }
+  </mat-card>
+</div>

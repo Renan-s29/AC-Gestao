@@ -1,0 +1,28 @@
+<div class="ac-page">
+  <h2>Benefícios</h2>
+  <p class="ac-muted">Verificação de liberação conforme regras financeiras (bloqueio após 5 dias; suspensão após 30 dias).</p>
+
+  <mat-card>
+    <div [formGroup]="form" class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>ID do associado</mat-label>
+        <input matInput formControlName="associado_id" />
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="button" (click)="consultar()">
+        <mat-icon>verified</mat-icon>
+        Consultar status
+      </button>
+    </div>
+
+    @if (erro()) {
+      <p class="erro">{{ erro() }}</p>
+    }
+    @if (resultado(); as r) {
+      <mat-card appearance="outlined" class="inner">
+        <p><strong>Status financeiro:</strong> {{ r.status_financeiro_associado }}</p>
+        <p><strong>Benefícios liberados:</strong> {{ r.beneficios_liberados ? 'Sim' : 'Não' }}</p>
+        <p class="ac-muted">{{ r.observacao }}</p>
+      </mat-card>
+    }
+  </mat-card>
+</div>

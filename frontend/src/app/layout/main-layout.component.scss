@@ -1,0 +1,116 @@
+:host { display: block; }
+
+.prototype-frame {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  background: #f3f6fb;
+  color: #1f2d4d;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.sidebar {
+  background: #203f78;
+  color: #fff;
+  min-height: 100vh;
+  border-right: 1px solid #17305d;
+}
+
+.side-brand {
+  height: 62px;
+  display: flex;
+  align-items: center;
+  padding: 0 22px;
+  font-weight: 800;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.side-menu { padding: 10px 0; }
+
+.side-menu a {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 18px;
+  color: #dce7ff;
+  text-decoration: none;
+  font-size: 14px;
+  border-left: 4px solid transparent;
+}
+
+.side-menu a mat-icon { font-size: 20px; width: 20px; height: 20px; }
+
+.side-menu a.active-link,
+.side-menu a:hover {
+  background: #2d59a5;
+  color: #fff;
+  border-left-color: #ffffff;
+}
+
+.work-area { min-width: 0; }
+
+.wire-topbar {
+  height: 62px;
+  background: #fff;
+  border-bottom: 1px solid #cfd8ea;
+  display: grid;
+  grid-template-columns: 52px minmax(320px, 1fr) auto auto;
+  align-items: center;
+  gap: 18px;
+  padding: 0 22px;
+}
+
+.hamb {
+  border: 0;
+  background: transparent;
+  color: #264577;
+  display: grid;
+  place-items: center;
+  cursor: default;
+}
+
+.global-search {
+  max-width: 720px;
+  height: 38px;
+  border: 2px solid #b8c8e2;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  color: #6b7890;
+  font-size: 14px;
+}
+.global-search mat-icon { color: #294d88; }
+
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #38537a;
+  white-space: nowrap;
+}
+
+.content { padding: 20px 22px 32px; }
+
+@media (max-width: 900px) {
+  .prototype-frame { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .wire-topbar { grid-template-columns: 40px 1fr; height: auto; padding: 12px; }
+  .user-area, .wire-topbar button[mat-button] { display: none; }
+  .content { padding: 12px; }
+}
+
+.global-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #1f3154;
+  font-size: 15px;
+}
+.global-search input::placeholder { color: #51688c; }

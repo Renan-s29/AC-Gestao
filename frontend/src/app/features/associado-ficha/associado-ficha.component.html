@@ -1,0 +1,116 @@
+<div class="ficha-wireframe">
+  @if (carregando()) {
+    <div class="loading"><mat-spinner diameter="40"></mat-spinner></div>
+  } @else {
+    @if (associado(); as a) {
+      <section class="ficha-header">
+        <button class="back-btn" type="button" routerLink="/associados"><mat-icon>arrow_back</mat-icon> Voltar</button>
+        <div class="company-title">
+          <h1>{{ a.razao_social || 'Empresa XYZ LTDA' }}</h1>
+          <span>CNPJ: {{ a.cnpj || '00.000.000/0001-00' }}</span>
+        </div>
+        <span class="status-pill">{{ a.status || 'Ativo' }}</span>
+        <button class="actions-btn" type="button" (click)="registrarAcao('Menu de ações')">Ações <mat-icon>expand_more</mat-icon></button>
+      </section>
+
+      
+      @if (mensagemAcao()) {
+        <div class="action-message">{{ mensagemAcao() }}</div>
+      }
+      @if (msgUpload()) {
+        <div class="action-message">{{ msgUpload() }}</div>
+      }
+
+      <mat-tab-group class="prototype-tabs" mat-stretch-tabs="false">
+        <mat-tab label="Geral">
+          <div class="tab-shell geral-tab">
+            <article class="panel dados-card">
+              <h2>Dados Cadastrais</h2>
+              <div class="info-grid">
+                <p><b>Telefone:</b> {{ a.telefone || '(16) 0000-0000' }}</p>
+                <p><b>E-mail:</b> {{ a.email || 'contato@email.com' }}</p>
+                <p><b>Plano:</b> {{ a.plano_nome || 'Plano Empresarial Plus' }}</p>
+                <p><b>Status:</b> {{ a.status || 'Ativo' }}</p>
+              </div>
+              <label class="primary-light"><mat-icon>upload_file</mat-icon> Upload de Documentos<input hidden type="file" accept="application/pdf" #arquivoPdf (change)="enviarPdf(arquivoPdf.files?.[0] || null)" /></label>
+            </article>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Financeiro">
+          <div class="tab-shell">
+            <article class="panel full-panel">
+              <h2>Mensalidades</h2>
+              <table class="prototype-table">
+                <thead><tr><th>Referência</th><th>Valor</th><th>Vencimento</th><th>Status</th><th>Ações</th></tr></thead>
+                <tbody>
+                  @for (f of faturamentos(); track f.id_faturamento || f.id) {
+                    <tr><td>{{ f.referencia_mes || 'Jan/2026' }}</td><td>R$ {{ f.valor_total | number:'1.2-2' }}</td><td>{{ f.data_vencimento }}</td><td><span class="tag">{{ f.status }}</span></td><td><button class="link-action" type="button" (click)="calcularJuros()">Calcular Juros</button></td></tr>
+                  } @empty {
+                    <tr><td>Jan/2026</td><td>R$ 320,00</td><td>10/01/2026</td><td><span class="tag ok">Pago</span></td><td>-</td></tr>
+                    <tr><td>Fev/2026</td><td>R$ 320,00</td><td>10/02/2026</td><td><span class="tag warn">Atrasado</span></td><td><button class="link-action" type="button" (click)="calcularJuros()">Calcular Juros</button></td></tr>
+                  }
+                </tbody>
+              </table>
+            </article>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Benefícios (Saúde)">
+          <div class="tab-shell health-grid">
+            <article class="panel plan-card">
+              <h2>Dados do Plano</h2>
+              <dl>
+                <dt>Plano:</dt><dd>{{ a.plano_nome || 'Plano Empresarial Plus' }}</dd>
+                <dt>Operadora:</dt><dd>Saúde +</dd>
+                <dt>Tipo:</dt><dd>Empresarial</dd>
+                <dt>Valor por beneficiário:</dt><dd>R$ 200,00</dd>
+                <dt>Taxa administração:</dt><dd>R$ 40,00</dd>
+                <dt>Vigência:</dt><dd>01/01/2026 a 31/12/2026</dd>
+              </dl>
+            </article>
+
+            <article class="panel dependents-card">
+              <div class="panel-header">
+                <h2>Dependentes</h2>
+                <button class="blue-button" type="button" (click)="incluirDependenteDemo()"><mat-icon>add</mat-icon> Incluir Dependente</button>
+              </div>
+              <table class="prototype-table">
+                <thead><tr><th>Nome</th><th>Parentesco</th><th>Data Nasc.</th><th>Status</th><th>Ações</th></tr></thead>
+                <tbody>
+                  @for (d of dependentes(); track d.id_dependente || d.id) {
+                    <tr><td>{{ d.nome }}</td><td>{{ d.tipo }}</td><td>{{ d.data_nascimento || '16/05/2015' }}</td><td><span class="tag">{{ d.status }}</span></td><td><mat-icon>edit</mat-icon> <mat-icon>delete</mat-icon></td></tr>
+                  } @empty {
+                    <tr><td>João Silva</td><td>Filho</td><td>16/05/2015</td><td><span class="tag ok">Ativo</span></td><td><mat-icon>edit</mat-icon> <mat-icon>delete</mat-icon></td></tr>
+                    <tr><td>Maria Silva</td><td>Cônjuge</td><td>22/08/1990</td><td><span class="tag warn">Carência</span></td><td><mat-icon>edit</mat-icon> <mat-icon>delete</mat-icon></td></tr>
+                    <tr><td>Pedro Silva</td><td>Filho</td><td>03/02/2019</td><td><span class="tag ok">Ativo</span></td><td><mat-icon>edit</mat-icon> <mat-icon>delete</mat-icon></td></tr>
+                  }
+                </tbody>
+              </table>
+
+              <h2 class="move-title">Movimentações</h2>
+              <table class="prototype-table small">
+                <thead><tr><th>Tipo</th><th>Data Solicitação</th><th>Data Envio Operadora</th><th>Status</th><th>Observação</th></tr></thead>
+                <tbody>
+                  <tr><td>Inclusão</td><td>05/05/2026</td><td>06/05/2026</td><td><span class="tag sent">Enviado</span></td><td>Inclusão João Silva</td></tr>
+                  <tr><td>Inclusão</td><td>05/05/2026</td><td>-</td><td><span class="tag warn">Pendente</span></td><td>Aguardando envio</td></tr>
+                </tbody>
+              </table>
+              <div class="footer-actions"><button class="blue-button" type="button" (click)="gerarGuia()">Gerar Guia de Movimentação</button></div>
+            </article>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Consultas SCPC">
+          <div class="tab-shell"><article class="panel full-panel"><h2>Consultas SCPC</h2><p>Histórico de consultas e faturamento automático.</p></article></div>
+        </mat-tab>
+        <mat-tab label="Documentos">
+          <div class="tab-shell"><article class="panel full-panel"><h2>Documentos</h2><p>Upload de documentos PDF com rastreabilidade e controle LGPD.</p></article></div>
+        </mat-tab>
+        <mat-tab label="Histórico">
+          <div class="tab-shell"><article class="panel full-panel"><h2>Histórico</h2><p>Registro de alterações e logs de acesso.</p></article></div>
+        </mat-tab>
+      </mat-tab-group>
+    }
+  }
+</div>

@@ -1,0 +1,60 @@
+<div class="dashboard-wireframe">
+  @if (carregando()) {
+    <div class="loading"><mat-spinner diameter="40"></mat-spinner></div>
+  } @else {
+    <section class="cards-row">
+      <div class="metric-card red">
+        <mat-icon>groups</mat-icon>
+        <div class="metric-number">{{ resumo()?.total_inadimplentes || 12 }}</div>
+        <strong>Inadimplentes</strong>
+        <span>Mensalidades em atraso</span>
+      </div>
+
+      <div class="metric-card blue">
+        <mat-icon>volunteer_activism</mat-icon>
+        <div class="metric-number">{{ resumo()?.pendencias_saude_total || 4 }}</div>
+        <strong>Pendências Saúde</strong>
+        <span>Aguardando envio</span>
+      </div>
+
+      <div class="metric-card cyan">
+        <mat-icon>receipt_long</mat-icon>
+        <div class="metric-number">{{ resumo()?.consultas_scpc_mes || 28 }}</div>
+        <strong>Consultas SCPC</strong>
+        <span>Esta semana</span>
+      </div>
+
+      <div class="metric-card purple">
+        <mat-icon>attach_money</mat-icon>
+        <div class="metric-number money">R$ {{ resumo()?.faturamento_scpc_mes || '3.240,00' }}</div>
+        <strong>Faturamento SCPC</strong>
+        <span>Este mês</span>
+      </div>
+    </section>
+
+    <section class="main-grid">
+      <article class="panel chart-panel">
+        <h2>Consultas SCPC / Boa Vista - Últimos 7 dias</h2>
+        <div class="chart-box">
+          <div class="y-labels"><span>20</span><span>15</span><span>10</span><span>5</span><span>0</span></div>
+          <svg viewBox="0 0 700 260" preserveAspectRatio="none" aria-label="Gráfico de linhas">
+            <polyline points="10,138 120,172 235,60 350,143 465,174 580,84 690,178" />
+            <circle cx="10" cy="138" r="5"/><circle cx="120" cy="172" r="5"/><circle cx="235" cy="60" r="5"/>
+            <circle cx="350" cy="143" r="5"/><circle cx="465" cy="174" r="5"/><circle cx="580" cy="84" r="5"/><circle cx="690" cy="178" r="5"/>
+          </svg>
+          <div class="x-labels"><span>06/05</span><span>07/05</span><span>08/05</span><span>09/05</span><span>10/05</span><span>11/05</span><span>12/05</span></div>
+        </div>
+      </article>
+
+      <article class="panel activity-panel">
+        <h2>Últimas Atividades</h2>
+        <ul>
+          <li><b>12/05</b> - João Ltda consultou SCPC</li>
+          <li><b>12/05</b> - Maria incluiu dependente</li>
+          <li><b>11/05</b> - Guia de saúde gerada</li>
+          <li><b>11/05</b> - Boleto enviado para ABC Ltda</li>
+        </ul>
+      </article>
+    </section>
+  }
+</div>

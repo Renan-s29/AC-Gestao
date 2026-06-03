@@ -1,0 +1,62 @@
+<div class="associados-page">
+  <section class="list-card">
+    <header class="list-header">
+      <button class="back-btn" type="button" routerLink="/dashboard">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+      <div>
+        <h1>Associados</h1>
+        <p>Cadastro institucional — LGPD: acesso restrito a finalidades legítimas.</p>
+      </div>
+      <button class="reload-btn" type="button" (click)="carregar()">
+        <mat-icon>refresh</mat-icon>
+        Atualizar
+      </button>
+    </header>
+
+    <div class="local-search">
+      <mat-icon>search</mat-icon>
+      <input #filtro type="text" [value]="termo()" placeholder="Buscar por razão social, CNPJ ou e-mail" (input)="pesquisar(filtro.value)" />
+    </div>
+
+    @if (erro()) {
+      <div class="alert-error">{{ erro() }}</div>
+    }
+
+    @if (carregando()) {
+      <div class="empty-state">Carregando associados...</div>
+    } @else {
+      <table class="associados-table">
+        <thead>
+          <tr>
+            <th>Razão social</th>
+            <th>CNPJ</th>
+            <th>E-mail</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (a of associadosFiltrados(); track a.id || a.id_associado) {
+            <tr (click)="abrirFicha(a)">
+              <td>{{ a.razao_social }}</td>
+              <td>{{ a.cnpj }}</td>
+              <td>{{ a.email }}</td>
+              <td><span class="status-badge">{{ a.status || 'ativo' }}</span></td>
+              <td>
+                <button class="open-btn" type="button" (click)="$event.stopPropagation(); abrirFicha(a)">
+                  Abrir ficha
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="empty-state">Nenhum associado encontrado.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+</div>

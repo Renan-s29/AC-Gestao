@@ -1,0 +1,73 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$ac-primary: mat.define-palette(mat.$indigo-palette, 700, 500, 900);
+$ac-accent: mat.define-palette(mat.$teal-palette, A200, A100, A400);
+$ac-warn: mat.define-palette(mat.$red-palette);
+
+$ac-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $ac-primary,
+      accent: $ac-accent,
+      warn: $ac-warn,
+    ),
+    typography: mat.define-typography-config(
+      $font-family: '"DM Sans", "Helvetica Neue", sans-serif'
+    ),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($ac-theme);
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+  background: #f4f6fb;
+}
+
+.ac-page {
+  padding: 1.25rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.ac-card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.ac-muted {
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 0.9rem;
+}
+
+.ac-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 180px;
+  padding: 0.5rem 0;
+}
+
+.ac-bar {
+  flex: 1;
+  background: linear-gradient(180deg, #3949ab, #5c6bc0);
+  border-radius: 6px 6px 2px 2px;
+  min-height: 4px;
+  position: relative;
+}
+
+.ac-bar span {
+  position: absolute;
+  bottom: -1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}

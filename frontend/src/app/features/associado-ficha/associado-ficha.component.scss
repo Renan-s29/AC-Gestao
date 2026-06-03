@@ -1,0 +1,104 @@
+.ficha-wireframe {
+  background: #fff;
+  border: 2px solid #b9c9e2;
+  border-radius: 8px;
+  overflow: hidden;
+  color: #263b61;
+}
+.ficha-header {
+  height: 72px;
+  display: grid;
+  grid-template-columns: 110px 1fr auto auto;
+  align-items: center;
+  border-bottom: 1px solid #d4deee;
+  background: #fff;
+}
+.back-btn {
+  height: 72px;
+  border: 0;
+  border-right: 1px solid #d4deee;
+  background: #fff;
+  color: #385780;
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  font-weight: 700;
+}
+.company-title { padding: 0 20px; }
+.company-title h1 { margin: 0 0 4px; font-size: 22px; color: #20375e; }
+.company-title span { font-size: 13px; font-weight: 700; color: #52698e; }
+.status-pill {
+  padding: 8px 18px;
+  border-radius: 4px;
+  background: #dff4ed;
+  color: #25765d;
+  font-weight: 800;
+  margin-right: 26px;
+}
+.actions-btn {
+  height: 42px;
+  margin-right: 18px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 4px;
+  background: #2064c8;
+  color: #fff;
+  display: flex; align-items: center; gap: 6px;
+  font-weight: 800;
+}
+:host ::ng-deep .prototype-tabs .mat-mdc-tab-header { border-bottom: 1px solid #d4deee; }
+:host ::ng-deep .prototype-tabs .mdc-tab { min-width: 140px; }
+:host ::ng-deep .prototype-tabs .mdc-tab__text-label { color: #2a4d82 !important; font-weight: 800; }
+.tab-shell { padding: 20px; }
+.health-grid { display: grid; grid-template-columns: 310px 1fr; gap: 20px; }
+.panel {
+  border: 1px solid #c4d2e6;
+  border-radius: 8px;
+  background: #fff;
+  padding: 18px;
+  min-height: 250px;
+}
+h2 { margin: 0 0 18px; color: #304e80; font-size: 16px; font-weight: 800; }
+dl { display: grid; grid-template-columns: 132px 1fr; row-gap: 16px; column-gap: 10px; margin: 0; font-size: 14px; }
+dt { font-weight: 800; color: #415b83; }
+dd { margin: 0; color: #526b93; font-weight: 700; }
+.panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.blue-button, .primary-light {
+  border: 0; border-radius: 4px; background: #2269c9; color: #fff;
+  height: 38px; padding: 0 16px; display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 800;
+}
+.primary-light { margin-top: 18px; }
+.prototype-table { width: 100%; border-collapse: collapse; font-size: 14px; color: #425b82; }
+.prototype-table th {
+  text-align: left; padding: 11px 10px; color: #405a84; font-weight: 800; border-bottom: 1px solid #d7e0ef;
+}
+.prototype-table td { padding: 12px 10px; border-bottom: 1px solid #edf1f7; vertical-align: middle; }
+.prototype-table mat-icon { font-size: 20px; width: 22px; height: 22px; color: #315d9b; margin-right: 8px; }
+.tag { display: inline-block; padding: 5px 12px; border-radius: 5px; background: #e8f3f1; color: #2d735f; font-weight: 800; font-size: 12px; }
+.tag.warn { background: #f8eed9; color: #a06a13; }
+.tag.ok { background: #e0f4ec; color: #20765b; }
+.tag.sent { background: #e6f1ff; color: #2366b3; }
+.move-title { margin-top: 24px; }
+.footer-actions { display: flex; justify-content: flex-end; margin-top: 14px; }
+.info-grid { display: grid; grid-template-columns: repeat(2, minmax(180px, 1fr)); gap: 14px; }
+.info-grid p { margin: 0; color: #526b93; }
+.full-panel { min-height: 300px; }
+.loading { display: flex; justify-content: center; padding: 2rem; }
+@media (max-width: 900px) { .ficha-header { grid-template-columns: 1fr; height: auto; padding: 12px; gap: 8px; } .back-btn { height: 42px; border: 1px solid #d4deee; } .health-grid { grid-template-columns: 1fr; } }
+
+.action-message {
+  margin: 14px 20px 0;
+  padding: 11px 14px;
+  border-radius: 8px;
+  background: #e8f5ee;
+  border: 1px solid #b9e4ca;
+  color: #1f7a46;
+  font-weight: 700;
+}
+.link-action {
+  border: 0;
+  background: transparent;
+  color: #1f63d2;
+  font-weight: 700;
+  cursor: pointer;
+}
+.primary-light { cursor: pointer; }

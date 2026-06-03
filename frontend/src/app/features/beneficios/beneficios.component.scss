@@ -1,0 +1,15 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.inner {
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.erro {
+  color: #b00020;
+}
