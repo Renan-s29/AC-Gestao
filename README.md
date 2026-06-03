@@ -1,2 +1,2 @@
-# AC-Gest-o
+# AC-Gestao
 Sistema AC-Gestão - Projeto Integrador Univesp
